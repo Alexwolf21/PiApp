@@ -14,6 +14,7 @@ import {
   faHome,
   faVolumeUp,
   faVolumeDown,
+  faMusic,
 } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 import logo from "./icon_pi.png";
@@ -79,6 +80,21 @@ function App() {
     } catch (error) {}
   };
 
+  const handleHomeAuto = async () => {
+    try {
+      await axios.post("http://192.168.29.17:5000/home_auto");
+    } catch (error) {
+      alert("Error", `An error occurred: ${error.message}`);
+    }
+  };
+  const handleSpotifyPlay = async () => {
+    try {
+      await axios.get("http://192.168.29.17:5000/spotify_play");
+    } catch (error) {
+      alert("Error", `An error occurred: ${error.message}`);
+    }
+  };
+
   return (
     <div className="App">
       <div className="welcome-text" ref={textRef}>
@@ -111,6 +127,14 @@ function App() {
           <FontAwesomeIcon icon={faImage} size="3x" />
           <span>View Camera</span>
         </div>
+        <div className="grid-item button" onClick={handleSpotifyPlay}>
+          <FontAwesomeIcon icon={faMusic} size="3x" />
+          <span>Spotify</span>
+        </div>
+        <div className="grid-item button" onClick={handleHomeAuto}>
+          <FontAwesomeIcon icon={faHome} size="3x" />
+          <span>Home Automation</span>
+        </div>
       </main>
       {/* Section for Dropbox, GitHub, and Home Automation */}
       <div>
@@ -124,12 +148,14 @@ function App() {
           <FontAwesomeIcon icon={faDownload} size="3x" />
           <span>Dropbox</span>
           <h4 className="download-text">
-            You can access all the files by just clicking the above Dropbox icon{" "}
+            You can access all the files by just clicking the above Dropbox icon
           </h4>
         </div>
         <div
           className="grid-item button"
-          onClick={() => (window.location.href = "https://github.com")}
+          onClick={() =>
+            (window.location.href = "https://github.com/Alexwolf21/PiApp")
+          }
         >
           <FontAwesomeIcon icon={faMobileAlt} size="3x" />
           <span>PiMate App</span>
@@ -140,7 +166,9 @@ function App() {
         </div>
         <div
           className="grid-item button"
-          onClick={() => (window.location.href = "/home_automation.js")}
+          onClick={() =>
+            (window.location.href = "https://github.com/Alexwolf21/PiApp")
+          }
         >
           <FontAwesomeIcon icon={faHome} size="3x" />
           <span>GitHub</span>
